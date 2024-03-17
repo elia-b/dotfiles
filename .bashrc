@@ -57,10 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 set -o vi
-bind "set show-mode-in-prompt on"
-
-bind "set vi-ins-mode-string \"\033[32m(ins)\""
-bind "set vi-cmd-mode-string \"\033[32m(cmd)\""
+EDITOR="nvim"
 function prompt_command {
     PS1=$(~/.config/bash/prompt.sh)
 }

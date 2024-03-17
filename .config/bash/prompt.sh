@@ -40,6 +40,6 @@ if [ "$VIRTUAL_ENV_PROMPT" != "" ]; then
     new_prompt+="  $VIRTUAL_ENV_PROMPT"
 fi
 new_prompt+='\[\033[00m\]\$ '
-echo "${new_prompt}"  # Return the colorized PS1 string
+echo "${new_prompt}" 
 
 
