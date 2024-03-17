@@ -56,13 +56,17 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+set -o vi
+bind "set show-mode-in-prompt on"
+
+bind "set vi-ins-mode-string \"\033[32m(ins)\""
+bind "set vi-cmd-mode-string \"\033[32m(cmd)\""
 function prompt_command {
-    export PS1=$(~/.config/bash/prompt.sh)
-}
-export PROMPT_COMMAND=prompt_command
-if [ "$color_prompt" = yes ]; then
     PS1=$(~/.config/bash/prompt.sh)
-else
+}
+PROMPT_COMMAND=prompt_command
+
+if [ $debian_chroot ]; then
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
@@ -121,3 +125,7 @@ if ! shopt -oq posix; then
 fi
 . "$HOME/.cargo/env"
 source /home/elia/External/alacritty/extra/completions/alacritty.bash
+
+#source ~/.config/bash/logo.sh
+#source ~/.config/bash/logo2.sh
+

@@ -1,8 +1,10 @@
+#! /bin/bash
+
 path=( $PWD )  
 home=( $HOME )  
 new_prompt=""
 if [[ path == home ]]; then
-    echo '${debian_chroot:+($debian_chroot)}\[\e[30;42m\] \w \[\033[00m\]\n\$ '
+    new_prompt+='$\[\e[30;42m\] \w' 
 else
     path_parts=(${path//\// })
     home_parts=(${home//\// })
@@ -27,7 +29,17 @@ else
         fi
     done
 fi
-new_prompt+='\[\033[00m\]\n\$ '
+
+if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
+    new_prompt+="\[\e[31;49m\]  $(git branch --show-current)" 
+fi
+
+new_prompt+='\[\033[33;49m\]\n'
+
+if [ "$VIRTUAL_ENV_PROMPT" != "" ]; then
+    new_prompt+="  $VIRTUAL_ENV_PROMPT"
+fi
+new_prompt+='\[\033[00m\]\$ '
 echo "${new_prompt}"  # Return the colorized PS1 string
 
 

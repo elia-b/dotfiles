@@ -1,2 +1,11 @@
-.ssh/
-.gnupg/
+*
+
+# Except
+
+!.bashrc
+!tmux.conf
+!.gitignore
+!README.md
+!.config/bash/*
+!.config/nvim/*
+!.config/alacritty/*
