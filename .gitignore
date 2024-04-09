@@ -11,3 +11,7 @@ lazy-lock.json
 !.config/nvim/
 !.config/alacritty/
 !.install/
+!.gitconfig
+!.bash_profile
+!.bash_logout
+
