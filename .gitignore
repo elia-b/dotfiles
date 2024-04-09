@@ -1,4 +1,4 @@
-*
+/*
 lazy-lock.json
 
 # Except
@@ -7,7 +7,7 @@ lazy-lock.json
 !tmux.conf
 !.gitignore
 !README.md
-!.config/bash/*
-!.config/nvim/*
-!.config/alacritty/*
-!.install/*
+!.config/bash/
+!.config/nvim/
+!.config/alacritty/
+!.install/
