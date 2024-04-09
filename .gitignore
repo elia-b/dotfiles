@@ -1,4 +1,5 @@
 *
+lazy-lock.json
 
 # Except
 
@@ -9,3 +10,4 @@
 !.config/bash/*
 !.config/nvim/*
 !.config/alacritty/*
+!.install/*
