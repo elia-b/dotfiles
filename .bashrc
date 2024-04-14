@@ -24,6 +24,9 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
+# Add `~/bin` to the `$PATH`
+export PATH="$HOME/bin:$PATH";
+
 set -o vi
 EDITOR="nvim"
 function prompt_command {
