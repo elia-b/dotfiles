@@ -2,6 +2,6 @@
 [keyboard]
 bindings = [
 { key = "N", mods = "Control|Shift", action = "CreateNewWindow" },
-{ key = "Q", mods = "Control|Shift", action = "Quit"},
+{ key = "W", mods = "Control|Shift", action = "Quit"},
 ]
 
