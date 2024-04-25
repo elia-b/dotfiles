@@ -33,6 +33,8 @@ shopt -s globstar
 export PATH="$HOME/bin:$PATH";
 
 set -o vi
+bind -m vi-command 'Control-l: clear-screen'
+bind -m vi-insert 'Control-l: clear-screen'
 EDITOR="nvim"
 function prompt_command {
     PS1=$(~/.config/bash/prompt.sh)
