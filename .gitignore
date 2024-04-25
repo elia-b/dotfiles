@@ -4,7 +4,7 @@ lazy-lock.json
 # Except
 
 !.bashrc
-!tmux.conf
+!.tmux.conf
 !.gitignore
 !README.md
 !.install/
