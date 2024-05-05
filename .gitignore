@@ -9,6 +9,7 @@ lazy-lock.json
 !README.md
 !.install/
 !.gitconfig
+!.gitattributes
 !.bash_profile
 !.bash_logout
 !bin/
@@ -18,3 +19,4 @@ lazy-lock.json
 !.config/bash/
 !.config/nvim/
 !.config/alacritty/
+!.config/system-images/
