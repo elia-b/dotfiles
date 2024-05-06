@@ -1,7 +1,7 @@
 #! /bin/bash
 
 function git_branch {
-  [ -d .git ] && git name-rev --name-only @
+  git name-rev --name-only @
 }
 
 path=( $PWD )  
