@@ -15,3 +15,21 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 vim.opt.clipboard = "unnamedplus"
+
+vim.opt.mouse = ""
+
+vim.opt.undofile = true
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+vim.opt.signcolumn = "yes"
+
+vim.opt.updatetime = 250
+
+vim.opt.inccommand = "split"
+
+vim.opt.hlsearch = true
+
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true

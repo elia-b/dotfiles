@@ -4,15 +4,19 @@ lazy-lock.json
 # Except
 
 !.bashrc
-!tmux.conf
+!.tmux.conf
 !.gitignore
 !README.md
-!.config/bash/
-!.config/nvim/
-!.config/alacritty/
 !.install/
 !.gitconfig
+!.gitattributes
 !.bash_profile
 !.bash_logout
 !bin/
 
+!.config/
+.config/*
+!.config/bash/
+!.config/nvim/
+!.config/alacritty/
+!.config/system-images/

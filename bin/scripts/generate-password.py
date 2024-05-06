@@ -34,9 +34,9 @@ def contains(password: str, char_set: str):
     return any(letter in char_set for letter in password)
 
 def replace(password: str, char_set: str):
-    password = list(password)
-    password[secrets.choice(range(len(password)))] = secrets.choice(char_set)
-    return ''.join(password)
+    password_letters = list(password)
+    password_letters[secrets.choice(range(len(password_letters)))] = secrets.choice(char_set)
+    return ''.join(password_letters)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Generate a secure password')
