@@ -1,5 +1,9 @@
 #! /bin/bash
 
+function git_branch {
+  [ -d .git ] && git name-rev --name-only @
+}
+
 path=( $PWD )  
 home=( $HOME )  
 new_prompt=""
@@ -31,7 +35,7 @@ else
 fi
 
 if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
-    new_prompt+="\[\e[31;49m\]  $(git branch --show-current)" 
+    new_prompt+="\[\e[31;49m\]  $(git_branch)" 
 fi
 
 new_prompt+='\[\033[33;49m\]\n'
