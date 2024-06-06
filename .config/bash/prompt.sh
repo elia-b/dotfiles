@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/env bash
 
 function git_branch {
   git name-rev --name-only @

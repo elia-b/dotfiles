@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Font installation instructions adapted from "How to Install Nerd Fonts on Linux"
 # by Captain Salem, https://www.geekbits.io/how-to-install-nerd-fonts-on-linux/
 
