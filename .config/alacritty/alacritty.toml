@@ -7,8 +7,8 @@ import = [
 ]
 
 [window]
-decorations = "Full"
-startup_mode = "Fullscreen"
+decorations = "None"
+startup_mode = "Maximized"
 dynamic_padding = true
 
 [window.padding]
