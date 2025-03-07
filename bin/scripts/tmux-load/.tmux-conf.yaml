@@ -1,0 +1,9 @@
+session:
+  name: test-session
+
+windows:
+  - name: test1
+    path: break/
+    command: bash
+  - name: test2
+    path: break2/
