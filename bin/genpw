@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-echo  $HOME/bin/scripts/generate-password.py 
-python3 $HOME/bin/scripts/generate-password.py "$@" | wl-copy

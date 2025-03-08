@@ -1,13 +1,6 @@
 /*
 lazy-lock.json
 
-# Exclude prolog
-
-bin/swipl
-bin/swipl-devel/
-bin/swipl-ld
-bin/swipl-win
-
 # Except
 
 !.bashrc
@@ -24,6 +17,5 @@ bin/swipl-win
 !.config/
 .config/*
 !.config/bash/
-!.config/nvim/
 !.config/alacritty/
 !.config/system-images/
