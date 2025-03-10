@@ -40,7 +40,7 @@ home=( $HOME )
 new_prompt=""
 
 if [ "$(whoami)" == "container" ]; then
-    new_prompt+="$BLACK$BG_RED  Dev " 
+    new_prompt+="$BLACK$BG_RED 󰡨 $DEV_CONTAINER_NAME " 
 fi
 
 path_parts=(${path//\// })
