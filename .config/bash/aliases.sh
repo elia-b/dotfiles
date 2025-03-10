@@ -40,4 +40,4 @@ alias p="cd ~/Projects"
 
 alias gits="git status"
 
-alias devcontainer="bash ~/Projects/DevContainers/scripts/run-dev-container.sh"
+alias devcontainer="bash ~/Projects/DevContainers/scripts/run-container.sh"
