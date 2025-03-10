@@ -43,6 +43,11 @@ function prompt_command {
 }
 PROMPT_COMMAND=prompt_command
 
+
+# After each command, append to the history file, 
+# in a already open tab this is only seen when I run some command to reload the history
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+
 set show-all-if-ambiguous on
 
 # Enable programmable completion features (you don't need to enable
