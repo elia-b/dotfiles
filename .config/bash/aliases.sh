@@ -38,3 +38,4 @@ alias -- -="cd -"
 alias dl="cd ~/Downloads"
 
 alias gits="git status"
+alias devcontainer="bash ~/Projects/DevContainers/scripts/run-container.sh"
