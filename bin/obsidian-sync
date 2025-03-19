@@ -1,0 +1,10 @@
+#!/bin/bash
+
+obsidian_vault=$DOTFILES_OBSIDIAN_VAULT
+
+ld obsidian_vault
+cd git pull --rebase  
+git add --all  
+git commit -m "laptop update $(date)"  
+git pull --rebase  
+git push origin main

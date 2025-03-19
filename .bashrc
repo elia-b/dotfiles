@@ -6,10 +6,14 @@
 [[ $- != *i* ]] && return
 
 # Import configuration files
-for file in ~/.config/bash/{aliases,}.sh; do
+for file in $HOME/.config/bash/{aliases,}.sh; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
+
+if [ -r "$HOME/.env" ] && [ -f "$HOME/.env" ]; then
+  source "$HOME/.env";
+fi
 
 # Don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -43,7 +47,7 @@ EDITOR=$VISUAL
 
 # Promptline
 function promptline {
-    PS1=$(~/.config/bash/prompt.sh)
+    PS1=$($HOME/.config/bash/prompt.sh)
 }
 PROMPT_COMMAND="promptline; $PROMPT_COMMAND"
 

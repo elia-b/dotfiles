@@ -69,5 +69,5 @@ tmux_new_or_attach() {
 # ===============================
 # Personal
 # ===============================
-alias p="cd ~/Projects"
-alias devcontainer="bash ~/Projects/DevContainers/scripts/run-container.sh"
+alias p="cd $DOTFILES_PROJECTS_PATH"
+alias devcontainer="bash $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER"

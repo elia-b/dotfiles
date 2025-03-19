@@ -7,3 +7,13 @@ The only difference is that, instead of using `git add -f filename`, I modify th
 
 My [Neovim configuration](https://github.com/elia-b/NeovimConfig) is separate.
 
+## Environment Variables
+
+Ensure the following `.env` file is present for proper functionality:
+
+```bash
+export DOTFILES_PROJECTS_PATH=
+export DOTFILES_OBSIDIAN_VAULT=
+export DOTFILES_DAILIES_DIR=
+export DOTFILES_DEVCONTAINER=
+```
