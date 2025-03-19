@@ -1,41 +1,73 @@
-alias vi=nvim
-alias vim=nvim
-alias nvim-clean="ls ~/.local/state/nvim/swap/ | xargs -I {} rm -f ~/.local/state/nvim/swap/{}" 
+# ===============================
+# File Listing Aliases
+# ===============================
+alias ll='ls --color=auto -AlF'
+alias la='ls --color=auto -A'
+alias l='ls --color=auto -CF'
 
-alias open=xdg-open
-
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-
-# some more ls aliases
-alias ll='ls -AlF'
-alias la='ls -A'
-alias l='ls -CF'
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
-
-alias rm='rm -i --preserve-root'
-
-# Add an "alert" alias for long running commands.  
-# Use like so: sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
+# ===============================
+# Directory Navigation Aliases
+# ===============================
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias -- -="cd -"
-
 alias dl="cd ~/Downloads"
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+alias sd="cd ~ && cd \$(find * -type d | fzf)"
+alias sdp="cd \$(fd -t d | fzf)"
 
-alias gits="git status"
+# ===============================
+# Editor Aliases
+# ===============================
+alias vi=nvim
+alias vim=nvim
+alias v='selected=$(fzf --preview="bat --color=always {}") && [ -n "$selected" ] && nvim "$selected"'
+alias nvim-clean="ls ~/.local/state/nvim/swap/ | xargs -I {} rm -f ~/.local/state/nvim/swap/{}" 
+
+# ===============================
+# Git Aliases
+# ===============================
+alias gits='git status'
+alias gl='git log --oneline --graph --decorate'
+alias gd='git diff'
+alias gco='git checkout'
+alias ga='git add'
+alias gc='git commit -m'
+
+# ===============================
+# Miscellaneous Useful Aliases
+# ===============================
+alias open=xdg-open
+alias cat="bat --color=always"
+alias rm='rm -i --preserve-root'
+extract() {
+    if [ -f "$1" ]; then
+        case "$1" in
+            *.tar.bz2|*.tbz2)   tar xvjf "$1" ;;
+            *.tar.gz|*.tgz)     tar xvzf "$1" ;;
+            *.bz2)              bunzip2 "$1" ;;
+            *.rar)              unrar x "$1" ;;
+            *.gz)               gunzip "$1" ;;
+            *.tar)              tar xvf "$1" ;;
+            *.zip)              unzip "$1" ;;
+            *.7z)               7z x "$1" ;;
+            *)                  echo "Cannot extract '$1'" ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+}
+alias tx="tmux_new_or_attach"
+tmux_new_or_attach() {
+    if tmux ls &>/dev/null; then
+        tmux attach -t 0
+    else
+        tmux new-session -s 0
+    fi
+}
+
+# ===============================
+# Personal
+# ===============================
+alias p="cd ~/Projects"
 alias devcontainer="bash ~/Projects/DevContainers/scripts/run-container.sh"

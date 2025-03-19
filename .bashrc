@@ -5,6 +5,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Import configuration files
 for file in ~/.config/bash/{aliases,}.sh; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
@@ -29,20 +30,22 @@ shopt -s checkwinsize
 shopt -s globstar
 
 # Add `~/bin` to the `$PATH`
-if [ -d "$HOME/bin" ] ;
-  then PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/bin" ] && [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+  PATH="$HOME/bin:$PATH"
 fi
 
+# Set vim motion and vim as editor
 set -o vi
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 VISUAL="nvim"
 EDITOR=$VISUAL
-function prompt_command {
+
+# Promptline
+function promptline {
     PS1=$(~/.config/bash/prompt.sh)
 }
-PROMPT_COMMAND=prompt_command
-
+PROMPT_COMMAND="promptline; $PROMPT_COMMAND"
 
 # After each command, append to the history file, 
 # in a already open tab this is only seen when I run some command to reload the history
@@ -61,3 +64,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Enable fzf
+eval "$(fzf --bash)"
