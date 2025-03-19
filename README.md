@@ -5,7 +5,16 @@ This repository is meant for personal use, but feel free to take inspiration fro
 I took inspiration from [this blog post](https://drewdevault.com/2019/12/30/dotfiles.html).
 The only difference is that, instead of using `git add -f filename`, I modify the `.gitignore` accordingly.
 
-My [Neovim configuration](https://github.com/elia-b/NeovimConfig) is separate.
+It contains:
+- bash scripts
+- alacritty configurations
+- tmux configurations 
+- bash configurations 
+- images
+- git global configs
+
+
+My [Neovim configuration ](https://github.com/elia-b/NeovimConfig) is separate.
 
 ## Environment Variables
 
