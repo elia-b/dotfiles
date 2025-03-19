@@ -1,7 +1,6 @@
 #!/bin/bash
 
 dailies_dir=$DOTFILES_OBSIDIAN_VAULT$DOTFILES_DAILIES_DIR
-echo $dailies_dir
 current_date=$(date +%d%b%Y)
 
 # Define the filename with the current date and ".md" extension

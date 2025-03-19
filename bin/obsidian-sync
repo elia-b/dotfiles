@@ -1,7 +1,6 @@
 #!/bin/bash
 
 obsidian_vault=$DOTFILES_OBSIDIAN_VAULT
-echo obsidian_vault
 
 cd $obsidian_vault
 git pull --rebase  
