@@ -69,4 +69,5 @@ if ! shopt -oq posix; then
 fi
 
 # Enable fzf
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 eval "$(fzf --bash)"

@@ -12,9 +12,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dl="cd ~/Downloads"
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-alias sd="cd ~ && cd \$(find * -type d | fzf)"
-alias sdp="cd \$(fd -t d | fzf)"
 
 # ===============================
 # Editor Aliases
