@@ -8,13 +8,13 @@ The only difference is that, instead of using `git add -f filename`, I modify th
 It contains:
 - bash scripts
 - alacritty configurations
-- tmux configurations 
-- bash configurations 
+- tmux configurations
+- bash configurations
 - images
 - git global configs
 
 
-My [Neovim configuration ](https://github.com/elia-b/NeovimConfig) is separate.
+My [Neovim configuration](https://github.com/elia-b/NeovimConfig) is separate.
 
 ## Environment Variables
 
