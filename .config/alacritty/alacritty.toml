@@ -28,6 +28,9 @@ style = "Medium Italic"
 family = "JetBrainsMono Nerd Font"
 style = "Medium"
 
+[selection]
+save_to_clipboard = true
+
 [general]
 
 live_config_reload = true
