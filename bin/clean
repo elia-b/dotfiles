@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo pacman -Sc
+sudo pacman -Qdtq | sudo pacman -Rns -
+sudo flatpak repair
+docker system prune

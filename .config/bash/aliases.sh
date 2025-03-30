@@ -18,7 +18,7 @@ alias dl="cd ~/Downloads"
 # ===============================
 alias vi=nvim
 alias vim=nvim
-alias v='selected=$(fzf --preview="bat --color=always {}") && [ -n "$selected" ] && nvim "$selected"'
+alias f='selected=$(fzf --preview="bat --color=always {}") && [ -n "$selected" ] && nvim "$selected"'
 alias nvim-clean="ls ~/.local/state/nvim/swap/ | xargs -I {} rm -f ~/.local/state/nvim/swap/{}" 
 
 # ===============================
@@ -68,3 +68,4 @@ tmux_new_or_attach() {
 # ===============================
 alias p="cd $DOTFILES_PROJECTS_PATH"
 alias devcontainer="bash $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER"
+alias bookmarksbackup="bash $DOTFILES_BOOKMARKS_BACKUP"

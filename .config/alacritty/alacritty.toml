@@ -10,7 +10,7 @@ hide_when_typing = true
 TERM="alacritty-direct"
 
 [font]
-size = 12.0
+size = 18.0
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"
