@@ -32,7 +32,14 @@ BG_THM_GREY1='\033[48;2;133;146;137m'
 BG_THM_GREY2='\033[48;2;157;169;160m'
 
 function git_branch {
-  git name-rev --name-only @
+    if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
+        path=$(realpath --relative-to="$(git rev-parse --show-toplevel)" .)
+        if ! git check-ignore -q "$path"; then
+            git name-rev --name-only @
+            return 0
+        fi
+    fi
+    return 1
 }
 
 path=( $PWD )  
@@ -49,7 +56,10 @@ if [[ ${#path_parts[@]} -ge 2 && ${#home_parts[@]} -ge 2 &&
  "${path_parts[0]}" == "${home_parts[0]}" &&  "${path_parts[1]}" == "${home_parts[1]}" ]] 
 then
     path_parts=("~" "${path_parts[@]:2}") 
+elif [[ ${#path_parts[@]} == 0 ]]; then
+    path_parts=("/") 
 fi
+
 for (( i=0; i<${#path_parts[@]}; i++ )); do
     if (( i % 2 == 0 )); then
         if (( i == ${#path_parts[@]} - 1)); then
@@ -66,8 +76,8 @@ for (( i=0; i<${#path_parts[@]}; i++ )); do
     fi
 done
 
-if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
-    new_prompt+="$GREEN$BG_DEFAULT  $(git_branch)" 
+if branch=$(git_branch); then
+    new_prompt+="$GREEN$BG_DEFAULT  $branch" 
 fi
 
 if [ "$VIRTUAL_ENV_PROMPT" != "" ]; then
