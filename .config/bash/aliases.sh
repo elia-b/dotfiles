@@ -1,7 +1,7 @@
 # ===============================
 # File Listing Aliases
 # ===============================
-alias ll='ls --color=auto -AlF'
+alias ll='ls --color=auto -AlhF'
 alias la='ls --color=auto -A'
 alias l='ls --color=auto -CF'
 
