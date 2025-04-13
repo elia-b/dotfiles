@@ -63,6 +63,7 @@ tmux_new_or_attach() {
     fi
 }
 alias mergepdfs="gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf"
+alias nvim-update='nvim --headless -c "Lazy! update" +qa'
 
 # ===============================
 # Personal
