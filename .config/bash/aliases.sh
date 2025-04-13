@@ -62,6 +62,7 @@ tmux_new_or_attach() {
         tmux new-session -s 0
     fi
 }
+alias mergepdfs="gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf"
 
 # ===============================
 # Personal
