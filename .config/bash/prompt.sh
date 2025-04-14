@@ -84,7 +84,7 @@ if [ "$VIRTUAL_ENV_PROMPT" != "" ]; then
     new_prompt+="$YELLOW$BG_DEFAULT\n  $VIRTUAL_ENV_PROMPT"
 fi
 
-new_prompt+="$RESET\n$ "
+new_prompt+="$RESET\n\$ "
 
 echo "${new_prompt}" 
 
