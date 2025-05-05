@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd ./scripts/
+git clone https://github.com/stefanhaustein/TerminalImageViewer.git
+cd TerminalImageViewer/src
+make
+cd ../../
+cp -f TerminalImageViewer/src/tiv tiv 
+rm -rf TerminalImageViewer
+cd ..

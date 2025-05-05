@@ -18,4 +18,7 @@ lazy-lock.json
 .config/*
 !.config/bash/
 !.config/alacritty/
+!.config/vifm/
+.config/vifm/scripts
+.config/vifm/vifminfo.json
 !.config/system-images/

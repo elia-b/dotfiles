@@ -1,9 +1,10 @@
 # ===============================
 # File Listing Aliases
 # ===============================
-alias ll='ls --color=auto -AlhF'
-alias la='ls --color=auto -A'
-alias l='ls --color=auto -CF'
+alias l='exa --icons --color -F -a --no-filesize --no-permissions --no-user --no-time'
+alias ll='exa --git --icons --color -F -al'
+alias t='exa --tree -F --icons'
+alias ta='exa --tree -aF --icons'
 
 # ===============================
 # Directory Navigation Aliases
@@ -12,13 +13,14 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dl="cd ~/Downloads"
+alias fm="vifm ."
 
 # ===============================
 # Editor Aliases
 # ===============================
 alias vi=nvim
 alias vim=nvim
-alias f='selected=$(fzf --preview="bat --color=always {}") && [ -n "$selected" ] && nvim "$selected"'
+alias f='selected=$(fzf --preview="bat --theme="ansi" --color=always {}") && [ -n "$selected" ] && nvim "$selected"'
 alias nvim-clean="ls ~/.local/state/nvim/swap/ | xargs -I {} rm -f ~/.local/state/nvim/swap/{}" 
 
 # ===============================
