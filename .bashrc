@@ -43,7 +43,7 @@ set -o vi
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
 VISUAL="nvim"
-EDITOR=$VISUAL
+export EDITOR=$VISUAL
 
 # Promptline
 function promptline {
