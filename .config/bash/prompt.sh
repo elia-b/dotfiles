@@ -60,6 +60,23 @@ elif [[ ${#path_parts[@]} == 0 ]]; then
     path_parts=("/") 
 fi
 
+case $path in
+    $home)
+        path_parts=(" ~") 
+        ;;
+    "$home/Downloads")
+        path_parts=("~" "󰉍 Downloads") 
+        ;;
+    "$home/Projects")
+        path_parts=("~" " Projects") 
+        ;;
+    "$home/Pictures")
+        path_parts=("~" "󰉏 Pictures") 
+        ;;
+    *)
+        ;;
+esac
+
 for (( i=0; i<${#path_parts[@]}; i++ )); do
     if (( i % 2 == 0 )); then
         if (( i == ${#path_parts[@]} - 1)); then
