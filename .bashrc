@@ -68,6 +68,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Enable fzf
+# fzf completion
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 eval "$(fzf --bash)"
+
+# devcontainer completion
+if [[ -n "$DOTFILES_DEVCONTAINER_COMPLETION" ]]; then
+  source $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER_COMPLETION
+fi
