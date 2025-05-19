@@ -609,4 +609,4 @@ nnoremap <a-o> :sync %c<cr>
 " ------------------------------------------------------------------------------
 
 " https://github.com/cirala/vifm_devicons
-source ./favicons.vifm
+source ~/.config/vifm/favicons.vifm
