@@ -22,3 +22,6 @@ lazy-lock.json
 .config/vifm/scripts
 .config/vifm/vifminfo.json
 !.config/system-images/
+!.config/containers/
+.config/containers/*
+!.config/containers/storage.conf
