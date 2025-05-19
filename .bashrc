@@ -71,6 +71,3 @@ fi
 # Enable fzf
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 eval "$(fzf --bash)"
-
-# Colors for tree command
-eval $(dircolors -b)
