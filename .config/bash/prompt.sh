@@ -73,6 +73,9 @@ case $path in
     "$home/Pictures")
         path_parts=("~" "󰉏 Pictures") 
         ;;
+    "/")
+        path_parts=(" /") 
+        ;;
     *)
         ;;
 esac
