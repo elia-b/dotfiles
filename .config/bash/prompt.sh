@@ -31,15 +31,25 @@ BG_THM_GREY0='\033[48;2;122;132;120m'
 BG_THM_GREY1='\033[48;2;133;146;137m'
 BG_THM_GREY2='\033[48;2;157;169;160m'
 
-function git_branch {
-    if [ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]; then
-        path=$(realpath --relative-to="$(git rev-parse --show-toplevel)" .)
-        if ! git check-ignore -q "$path"; then
-            git name-rev --name-only @
-            return 0
-        fi
-    fi
-    return 1
+git_branch() {
+  git rev-parse --is-inside-work-tree &>/dev/null || return 1
+
+  local git_root prefix relpath branch
+  git_root=$(git rev-parse --show-toplevel)
+  prefix=$(git rev-parse --show-prefix)
+
+  if [ -n "$prefix" ]; then
+    relpath=${prefix%/}
+  else
+    relpath="."
+  fi
+
+  if ! git check-ignore -q "$relpath"; then
+    git symbolic-ref --quiet --short HEAD
+    return 0
+  fi
+
+  return 1
 }
 
 path=( $PWD )  
