@@ -70,6 +70,7 @@ fi
 
 # fzf completion
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_DEFAULT_OPTS='--color 16'
 eval "$(fzf --bash)"
 
 # devcontainer completion
