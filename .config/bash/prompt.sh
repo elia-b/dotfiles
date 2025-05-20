@@ -83,6 +83,9 @@ case $path in
     "$home/Pictures")
         path_parts=("~" "󰉏 Pictures") 
         ;;
+    "$home/app")
+        path_parts=("~" " ") 
+        ;;
     "/")
         path_parts=(" /") 
         ;;
