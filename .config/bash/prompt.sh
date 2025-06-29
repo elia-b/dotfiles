@@ -57,7 +57,7 @@ home=( $HOME )
 new_prompt=""
 
 if [ "$(whoami)" == "container" ]; then
-    new_prompt+="$BLACK$BG_BLUE 󰡨 $DEV_CONTAINER_NAME " 
+    new_prompt+="$BLUE$BLACK$BG_BLUE $DEV_CONTAINER_NAME " 
 fi
 
 path_parts=(${path//\// })
@@ -93,10 +93,18 @@ case $path in
         ;;
 esac
 
-if (( 1 == ${#path_parts[@]})); then
-    new_prompt+="$GREEN$BG_DEFAULT"
+if [ "$(whoami)" == "container" ]; then
+    if (( 1 == ${#path_parts[@]})); then
+        new_prompt+="$GREEN$BG_BLUE"
+    else
+        new_prompt+="$THM_GREY2$BG_BLUE"
+    fi
 else
-    new_prompt+="$THM_GREY2$BG_DEFAULT"
+    if (( 1 == ${#path_parts[@]})); then
+        new_prompt+="$GREEN$BG_DEFAULT"
+    else
+        new_prompt+="$THM_GREY2$BG_DEFAULT"
+    fi
 fi
 
 for (( i=0; i<${#path_parts[@]}; i++ )); do

@@ -76,5 +76,5 @@ alias nvim-update='nvim --headless -c "Lazy! update" +qa'
 # Personal
 # ===============================
 alias p="cd $DOTFILES_PROJECTS_PATH"
-alias devcontainer="source $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER"
+alias devcontainer="bash $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER"
 alias bookmarksbackup="source $DOTFILES_PROJECTS_PATH$DOTFILES_BOOKMARKS_BACKUP"
