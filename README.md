@@ -23,7 +23,6 @@ Ensure the following `.env` file is present for proper functionality:
 ```bash
 export DOTFILES_PROJECTS_PATH=
 export DOTFILES_OBSIDIAN_VAULT=
-export DOTFILES_DAILIES_DIR=
 export DOTFILES_DEVCONTAINER=
 export DOTFILES_DEVCONTAINER_COMPLETION=
 export DOTFILES_BOOKMARKS_BACKUP=

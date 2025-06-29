@@ -34,6 +34,11 @@ alias ga='git add'
 alias gc='git commit -m'
 
 # ===============================
+# Screen Capture
+# ===============================
+alias sshot='grim - | tee ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S").png | wl-copy'
+alias sshotp='slurp | grim -g - - | tee ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S").png | wl-copy'
+# ===============================
 # Miscellaneous Useful Aliases
 # ===============================
 alias open=xdg-open
@@ -71,5 +76,5 @@ alias nvim-update='nvim --headless -c "Lazy! update" +qa'
 # Personal
 # ===============================
 alias p="cd $DOTFILES_PROJECTS_PATH"
-alias devcontainer="bash $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER"
-alias bookmarksbackup="bash $DOTFILES_PROJECTS_PATH$DOTFILES_BOOKMARKS_BACKUP"
+alias devcontainer="source $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER"
+alias bookmarksbackup="source $DOTFILES_PROJECTS_PATH$DOTFILES_BOOKMARKS_BACKUP"

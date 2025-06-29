@@ -1,7 +1,6 @@
 [window]
 decorations = "None"
 startup_mode = "Maximized"
-dynamic_padding = true
 
 [mouse]
 hide_when_typing = true

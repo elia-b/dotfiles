@@ -1,24 +1,11 @@
 #!/bin/bash
 
-dailies_dir=$DOTFILES_OBSIDIAN_VAULT$DOTFILES_DAILIES_DIR
-current_date=$(date +%d%b%Y)
+dailies_dir=$DOTFILES_OBSIDIAN_VAULT
 
-# Define the filename with the current date and ".md" extension
-filename="${dailies_dir}${current_date}.md"
+filename="${dailies_dir}ToDo.md"
 
-# Check if the file exists
 if [ -f "$filename" ]; then
     nvim "$filename"
-else
-    counter=1
-    previous_date=$(date -d "-${counter} day" +%d%b%Y)
-    previous_filename="${dailies_dir}${previous_date}.md"
-    while [ ! -f "$previous_filename" ]
-    do
-        ((counter++))
-        previous_date=$(date -d "-${counter} day" +%d%b%Y)
-        previous_filename="${dailies_dir}${previous_date}.md"
-    done
-    cp "$previous_filename" "$filename"
-    nvim "$filename"
 fi
+
+obsidian-sync

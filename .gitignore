@@ -25,3 +25,6 @@ lazy-lock.json
 !.config/containers/
 .config/containers/*
 !.config/containers/storage.conf
+!.config/sway/
+!.config/waybar/
+!.config/wofi/

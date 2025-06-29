@@ -93,18 +93,42 @@ case $path in
         ;;
 esac
 
+if (( 1 == ${#path_parts[@]})); then
+    new_prompt+="$GREEN$BG_DEFAULT"
+else
+    new_prompt+="$THM_GREY2$BG_DEFAULT"
+fi
+
 for (( i=0; i<${#path_parts[@]}; i++ )); do
     if (( i % 2 == 0 )); then
+        if ((i != 0)); then
+            if (( i == ${#path_parts[@]} - 1)); then
+                new_prompt+="$BLACK$BG_GREEN "
+            else
+                new_prompt+="$BLACK$BG_THM_GREY2 "
+            fi
+        fi
         if (( i == ${#path_parts[@]} - 1)); then
-            new_prompt+="$BLACK$BG_THM_GREY2 ${path_parts[$i]} $THM_GREY2$BG_DEFAULT"  
+            new_prompt+="$BLACK$BG_GREEN${path_parts[$i]}$GREEN$BG_DEFAULT"  
+        elif (( i == ${#path_parts[@]} - 2)); then
+            new_prompt+="$BLACK$BG_THM_GREY2${path_parts[$i]}$THM_GREY2$BG_GREEN"  
         else
-            new_prompt+="$BLACK$BG_THM_GREY2 ${path_parts[$i]} $THM_GREY2$BG_THM_GREY0"  
+            new_prompt+="$BLACK$BG_THM_GREY2${path_parts[$i]}$THM_GREY2$BG_THM_GREY0"  
         fi
     else
+        if ((i != 0)); then
+            if (( i == ${#path_parts[@]} - 1)); then
+                new_prompt+="$BLACK$BG_GREEN "
+            else
+                new_prompt+="$BLACK$BG_THM_GREY0 "
+            fi
+        fi
         if (( i == ${#path_parts[@]} - 1)); then
-            new_prompt+="$BLACK$BG_THM_GREY0 ${path_parts[$i]} $THM_GREY0$BG_DEFAULT"  
+            new_prompt+="$BLACK$BG_GREEN${path_parts[$i]}$GREEN$BG_DEFAULT"  
+        elif (( i == ${#path_parts[@]} - 2)); then
+            new_prompt+="$BLACK$BG_THM_GREY0${path_parts[$i]}$THM_GREY0$BG_GREEN"  
         else
-            new_prompt+="$BLACK$BG_THM_GREY0 ${path_parts[$i]} $THM_GREY0$BG_THM_GREY2"  
+            new_prompt+="$BLACK$BG_THM_GREY0${path_parts[$i]}$THM_GREY0$BG_THM_GREY2"  
         fi
     fi
 done
