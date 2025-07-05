@@ -231,8 +231,6 @@ bar swaybar_command waybar
 include /etc/sway/config.d/*
 
 # Autostart apps
-workspace 1
-exec $term -e tx
 workspace 2
 exec $browser
 workspace 1
