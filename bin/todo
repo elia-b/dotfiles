@@ -1,0 +1,11 @@
+#!/bin/bash
+
+dailies_dir=$DOTFILES_OBSIDIAN_VAULT
+
+filename="${dailies_dir}ToDo.md"
+
+if [ -f "$filename" ]; then
+    nvim "$filename"
+fi
+
+obsidian-sync

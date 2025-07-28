@@ -1,0 +1,3 @@
+#!/bin/bash
+# dp stands for delete password
+cliphist delete-query $(wl-paste)

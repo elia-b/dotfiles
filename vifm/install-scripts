@@ -1,0 +1,15 @@
+#!/bin/bash
+(
+script_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+cd $script_dir
+rm -rf scripts
+mkdir scripts
+cd ./scripts/
+git clone https://github.com/stefanhaustein/TerminalImageViewer.git
+cd TerminalImageViewer/src
+make
+cd ../../
+cp -f TerminalImageViewer/src/tiv tiv 
+rm -rf TerminalImageViewer
+cd ..
+)
