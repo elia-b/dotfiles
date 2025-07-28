@@ -22,7 +22,7 @@ for app in bin; do
   echo "Linked $src   $tgt"
 done
 
-for conf in .bashrc; do
+for conf in .bashrc .profile; do
   src="$script_dir/$conf"
   tgt="$HOME/$conf"
   rm -f "$tgt"
