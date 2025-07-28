@@ -6,7 +6,7 @@ rm -rf "$HOME/.tmux.conf"
 mkdir -p $HOME/.config 
 mkdir -p $HOME/.local 
 
-for app in tmux bash containers system-images vifm; do
+for app in tmux bash containers vifm; do
   src="$script_dir/$app"
   tgt="$HOME/.config/$app"
   rm -rf "$tgt"
