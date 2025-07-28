@@ -10,15 +10,15 @@ if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -r "$HOME/.env" ] && [ -f "$HOME/.env" ]; then
+  source "$HOME/.env";
+fi
+
 # Import configuration files
 for file in $HOME/.config/bash/{aliases,}.sh; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
-if [ -r "$HOME/.env" ] && [ -f "$HOME/.env" ]; then
-  source "$HOME/.env";
-fi
 
 # Don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
