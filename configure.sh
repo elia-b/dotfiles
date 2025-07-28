@@ -3,6 +3,8 @@
 script_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
 
 rm -rf "$HOME/.tmux.conf"
+mkdir -p $HOME/.config 
+mkdir -p $HOME/.local 
 
 for app in tmux bash containers system-images vifm; do
   src="$script_dir/$app"
