@@ -1,8 +1,0 @@
-#!/bin/bash
-
-pass git pull --rebase
-pass git push
-obsidian-sync
-nvim --headless -c "Lazy! update" +qa
-source $DOTFILES_PROJECTS_PATH$DOTFILES_BOOKMARKS_BACKUP
-bash $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER update

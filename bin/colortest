@@ -1,4 +1,7 @@
 #!/bin/bash
+# Simple color test for terminal
+# My pallette is Everforest Dark
+# https://github.com/sainnhe/everforest/blob/master/palette.md#dark
 
 # Define text colors
 BLACK='\e[30m'

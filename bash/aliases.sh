@@ -36,8 +36,9 @@ alias gc='git commit -m'
 # ===============================
 # Screen Capture
 # ===============================
-alias sshot='grim - | tee ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S").png | wl-copy'
-alias sshotp='slurp | grim -g - - | tee ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S").png | wl-copy'
+alias screen_shot='grim - | tee ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S").png | wl-copy'
+alias screen_shot_partial='slurp | grim -g - - | tee ~/Pictures/Screenshots/$(date "+%Y%m%d-%H%M%S").png | wl-copy'
+
 # ===============================
 # Miscellaneous Useful Aliases
 # ===============================
@@ -62,9 +63,7 @@ extract() {
     fi
 }
 alias tx="tmux_new_or_attach"
-
 alias mergepdfs="gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf"
-alias nvim-update='nvim --headless -c "Lazy! update" +qa'
 
 # ===============================
 # Personal

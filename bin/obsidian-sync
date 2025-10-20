@@ -1,4 +1,6 @@
 #!/bin/bash
+# Handy command to just sync my obsidian vault with git.
+# Commit messages are not important.
 
 obsidian_vault=$DOTFILES_OBSIDIAN_VAULT
 

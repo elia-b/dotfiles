@@ -1,4 +1,5 @@
 #!/bin/bash
+# Quickly open ToDo file and sync it with git
 
 dailies_dir=$DOTFILES_OBSIDIAN_VAULT
 

@@ -1,0 +1,12 @@
+# I decided to define my user at system level,
+# since I am the only user on this machine 
+# and also so that I do not commit my email.
+
+[init]
+	defaultBranch = main
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

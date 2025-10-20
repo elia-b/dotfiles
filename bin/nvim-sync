@@ -1,0 +1,9 @@
+#!/bin/bash
+# Command to update NeoVim
+
+if command -v nvim &> /dev/null; then
+    nvim --headless -c "Lazy! update" -c "qall" 
+    nvim --headless -c "MasonUpdate" -c "qall" && echo # echo needed since Mason does not print \n
+else
+    echo "WARNING: Nvim not installed"
+fi

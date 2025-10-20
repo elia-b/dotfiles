@@ -1,6 +1,22 @@
 #!/bin/bash
+# Command to clean up root partition
 
+# Remove all the cached packages that are not currently installed, and the unused sync databases
+# https://wiki.archlinux.org/title/Pacman
 sudo pacman -Sc
+
+# For recursively removing orphans and their configuration files
+# https://wiki.archlinux.org/title/Pacman/Tips_and_tricks 
 sudo pacman -Qdtq | sudo pacman -Rns -
-sudo flatpak repair
-docker system prune
+
+# Repair a flatpak installation by pruning and reinstalling invalid objects.
+# https://man.archlinux.org/man/flatpak-repair.1.en
+if command -v flatpak &> /dev/null; then
+    sudo flatpak repair
+fi
+
+# Remove all unused containers, networks, images 
+# https://docs.docker.com/reference/cli/docker/system/prune/
+if command -v docker &> /dev/null; then
+    docker system prune
+fi

@@ -1,0 +1,16 @@
+#!/bin/bash
+# I called this command sync-me cause the idea is that it would:
+# - update the system
+# - upload any change worth saving to git repos
+#
+sudo pacman -Syu --noconfirm
+pass git pull --rebase
+pass git push
+obsidian-sync
+nvim-sync
+# sync browser bookmarks
+source $DOTFILES_PROJECTS_PATH$DOTFILES_BOOKMARKS_BACKUP
+
+# The next command is commented since I still need to understand what to do with devcontainers
+# and I do not want to update all of them in a command that I would like to use frequently
+# bash $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER update
