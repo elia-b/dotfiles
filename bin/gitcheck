@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# This is a small script to keep track of my local repositories
+# gitcheck -> gives an overview
+# gitcheck add [path] -> adds the given path to the paths to check
+
+FILE="$HOME/.local/gitcheck/.gitcheck"
+
+# Colors
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+YELLOW='\033[0;33m'
+RESET='\033[0m'
+
+add_path() {
+    # Function to add a path to the file
+    
+    local path="$1"
+    # Expand ~, . and ..
+    path=$(realpath "$path" 2>/dev/null || readlink -f "$path")
+
+    if [[ -z "$path" ]]; then
+        echo "Usage: $0 add /path/to/repo"
+        exit 1
+    fi
+
+    if ! [[ -d "$path" ]]; then
+        echo "Error: '$path' is not a directory"
+        exit 1
+    fi
+
+    mkdir -p "$(dirname "$FILE")"
+
+    # Avoid duplicates
+    if grep -Fxq "$path" "$FILE" 2>/dev/null; then
+        echo "Path already exists in $FILE"
+    else
+        echo "$path" >> "$FILE"
+        echo "Added: $path"
+    fi
+}
+
+# If "add" command used
+if [[ "$1" == "add" ]]; then
+    add_path "$2"
+    exit 0
+fi
+
+# Ensure file exists
+if [[ ! -f "$FILE" ]]; then
+    echo "File not found: $FILE"
+    exit 1
+fi
+
+# Sort file by basename while keeping full path
+sorted_paths=$(awk -F/ '{print $0 "\t" $NF}' "$FILE" | sort -k2 | cut -f1)
+
+# Iterate through the paths
+while IFS= read -r path; do
+    [[ -z "$path" ]] && continue
+    eval path="$path"  # expand ~
+    repo_name=$(basename "$path")
+
+    if [[ -d "$path/.git" ]]; then
+        # Move to a path and then come back
+        pushd "$path" >/dev/null 2>&1
+        if [[ -n "$(git status --porcelain 2>/dev/null)" ]]; then
+            echo -e "${RED} ${repo_name}${RESET}"
+            git diff --stat
+        else
+            echo -e "${BLUE} ${repo_name}${RESET}"
+        fi
+        popd >/dev/null 2>&1
+    else
+        echo -e "${YELLOW} ${repo_name}${RESET}"
+    fi
+done <<< "$sorted_paths"
