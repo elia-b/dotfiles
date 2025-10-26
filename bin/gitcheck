@@ -3,13 +3,18 @@
 # gitcheck -> gives an overview
 # gitcheck add [path] -> adds the given path to the paths to check
 
-FILE="$HOME/.local/gitcheck/.gitcheck"
+CONFIG_FILE="$HOME/.local/gitcheck/.gitcheck"
 
-# Colors
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-YELLOW='\033[0;33m'
-RESET='\033[0m'
+# Define text colors
+BLACK='\e[30m'
+RED='\e[31m'
+GREEN='\e[32m'
+YELLOW='\e[33m'
+BLUE='\e[34m'
+MAGENTA='\e[35m'
+CYAN='\e[36m'
+WHITE='\e[37m'
+RESET='\e[0m'
 
 add_path() {
     # Function to add a path to the file
@@ -28,13 +33,13 @@ add_path() {
         exit 1
     fi
 
-    mkdir -p "$(dirname "$FILE")"
+    mkdir -p "$(dirname "$CONFIG_FILE")"
 
     # Avoid duplicates
-    if grep -Fxq "$path" "$FILE" 2>/dev/null; then
-        echo "Path already exists in $FILE"
+    if grep -Fxq "$path" "$CONFIG_FILE" 2>/dev/null; then
+        echo "Path already exists in $CONFIG_FILE"
     else
-        echo "$path" >> "$FILE"
+        echo "$path" >> "$CONFIG_FILE"
         echo "Added: $path"
     fi
 }
@@ -46,13 +51,24 @@ if [[ "$1" == "add" ]]; then
 fi
 
 # Ensure file exists
-if [[ ! -f "$FILE" ]]; then
-    echo "File not found: $FILE"
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "File not found: $CONFIG_FILE"
     exit 1
 fi
 
+# --- Flags ---
+FETCH=false
+
+# Parse flags
+while getopts "F" opt; do
+  case $opt in
+    F) FETCH=true ;;
+  esac
+done
+shift $((OPTIND - 1))
+
 # Sort file by basename while keeping full path
-sorted_paths=$(awk -F/ '{print $0 "\t" $NF}' "$FILE" | sort -k2 | cut -f1)
+sorted_paths=$(awk -F/ '{print $0 "\t" $NF}' "$CONFIG_FILE" | sort -k2 | cut -f1)
 
 # Iterate through the paths
 while IFS= read -r path; do
@@ -61,16 +77,37 @@ while IFS= read -r path; do
     repo_name=$(basename "$path")
 
     if [[ -d "$path/.git" ]]; then
-        # Move to a path and then come back
+        # Move to repo then come back
         pushd "$path" >/dev/null 2>&1
         if [[ -n "$(git status --porcelain 2>/dev/null)" ]]; then
             echo -e "${RED} ${repo_name}${RESET}"
             git diff --stat
         else
-            echo -e "${BLUE} ${repo_name}${RESET}"
+            # Fetch remote silently
+            if $FETCH; then
+                git fetch origin >/dev/null 2>&1
+            fi
+
+            # Check remote tracking info
+            local=$(git rev-parse @ 2>/dev/null)
+            remote=$(git rev-parse @{u} 2>/dev/null || echo "")
+            base=$(git merge-base @ @{u} 2>/dev/null || echo "")
+
+            # Decide color/icon based on ahead/behind/diverged status
+            if [[ -z "$remote" ]]; then
+                echo -e "${YELLOW} ${repo_name} (no upstream)${RESET}"
+            elif [[ "$local" == "$remote" ]]; then
+                echo -e "${GREEN} ${repo_name}${RESET}"
+            elif [[ "$local" == "$base" ]]; then
+                echo -e "${BLUE} ${repo_name} (behind)${RESET}"
+            elif [[ "$remote" == "$base" ]]; then
+                echo -e "${CYAN} ${repo_name} (ahead)${RESET}"
+            else
+                echo -e "${MAGENTA} ${repo_name} (diverged ⚠️)${RESET}"
+            fi
         fi
         popd >/dev/null 2>&1
     else
-        echo -e "${YELLOW} ${repo_name}${RESET}"
+        echo -e "${WHITE} ${repo_name}${RESET}"
     fi
 done <<< "$sorted_paths"
