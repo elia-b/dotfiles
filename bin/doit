@@ -1,0 +1,11 @@
+#!/bin/bash
+# Print out daily chores
+
+dailies_dir=$DOTFILES_OBSIDIAN_VAULT
+
+filename="${dailies_dir}ToDo.md"
+
+if [ -f "$filename" ]; then
+    awk '/##/ {count++; next} count==1 {print}' $filename
+fi
+
