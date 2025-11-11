@@ -2,3 +2,4 @@ vifm/scripts/*
 vifm/vifminfo.json
 .config/containers/*
 !.config/containers/storage.conf
+bin/python*
