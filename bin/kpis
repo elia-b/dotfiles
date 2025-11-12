@@ -1,0 +1,30 @@
+#!/bin/bash
+# Print out daily chores
+
+dailies_dir=$DOTFILES_OBSIDIAN_VAULT
+
+filename="${dailies_dir}Chautauqua/Personal KPIs.md"
+
+if [ -f "$filename" ]; then
+  awk '
+    # When a line has "##"
+    /####/ {
+      count++
+      # Remove all # characters and trim spaces
+      gsub(/#/, "")
+      gsub(/^[ \t]+|[ \t]+$/, "")   # trim leading/trailing spaces
+      if ($0 != "") {
+        cmd = "toilet --rainbow -f future"
+        print $0 | cmd
+        close(cmd)
+      }
+      next
+    }
+
+    # For lines after the 1st "####"
+    count >= 1 {
+      if ($0 != "")
+        print
+    }
+  ' "$filename"
+fi

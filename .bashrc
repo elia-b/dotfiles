@@ -77,3 +77,5 @@ eval "$(fzf --bash)"
 if [[ -n "$DOTFILES_DEVCONTAINER_COMPLETION" ]]; then
   source $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER_COMPLETION
 fi
+
+kpis
