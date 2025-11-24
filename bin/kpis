@@ -14,7 +14,7 @@ if [ -f "$filename" ]; then
       gsub(/#/, "")
       gsub(/^[ \t]+|[ \t]+$/, "")   # trim leading/trailing spaces
       if ($0 != "") {
-        cmd = "toilet --metal -f wideterm"
+        cmd = "toilet -f term -F border"
         print $0 | cmd
         close(cmd)
       }
