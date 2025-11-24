@@ -13,7 +13,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dl="cd ~/Downloads"
-alias fm="vifm ."
+alias fm="yazi ."
 
 # ===============================
 # Editor Aliases

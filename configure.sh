@@ -12,7 +12,7 @@ mkdir -p $HOME/.local
 rm -rf "$HOME/.tmux.conf"
 
 # Apps configuration in .config
-for app in tmux bash containers yazi vifm; do
+for app in tmux bash containers yazi; do
   src="$script_dir/$app"
   tgt="$HOME/.config/$app"
   rm -rf "$tgt"
@@ -39,5 +39,3 @@ for conf in .bashrc .profile .gitconfig; do
   echo "Linked $src   $tgt"
 done
 
-# Install vifm script for image visualization in terminal
-source $script_dir/vifm/install-scripts
