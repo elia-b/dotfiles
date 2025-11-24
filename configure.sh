@@ -12,7 +12,7 @@ mkdir -p $HOME/.local
 rm -rf "$HOME/.tmux.conf"
 
 # Apps configuration in .config
-for app in tmux bash containers vifm; do
+for app in tmux bash containers yazi vifm; do
   src="$script_dir/$app"
   tgt="$HOME/.config/$app"
   rm -rf "$tgt"
