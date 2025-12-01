@@ -58,14 +58,44 @@ fi
 
 # --- Flags ---
 FETCH=false
+HELP=false
 
 # Parse flags
-while getopts "F" opt; do
+while getopts "Fh" opt; do
   case $opt in
     F) FETCH=true ;;
+    h) HELP=true ;;
   esac
 done
 shift $((OPTIND - 1))
+
+if $HELP; then
+    printf "%b" "\
+${CYAN}gitcheck${RESET} - Overview and management of your local Git repositories.
+
+Usage:
+  ${GREEN}gitcheck${RESET}                 Show status of all tracked repositories
+  ${GREEN}gitcheck add [path]${RESET}     Add a local repository path to track
+  ${GREEN}gitcheck -F${RESET}            Fetch updates from remotes before showing status
+  ${GREEN}gitcheck -h${RESET}            Display this help message
+
+Status Legend:
+  ${GREEN} RepoName${RESET}              Up-to-date with remote
+  ${BLUE} RepoName (behind)${RESET}      Local is behind remote
+  ${CYAN} RepoName (ahead)${RESET}       Local is ahead of remote
+  ${MAGENTA} RepoName (diverged ⚠️)${RESET} Local and remote have diverged
+  ${YELLOW} RepoName (no upstream)${RESET} No remote upstream configured
+  ${RED} RepoName${RESET}                Has local changes
+  ${WHITE} RepoName${RESET}              Not a Git repository
+
+Examples:
+  ${GREEN}gitcheck add ~/projects/myrepo${RESET}  Add a new repository to track
+  ${GREEN}gitcheck -F${RESET}                     Check all repos and fetch updates
+
+"
+    exit 0
+fi
+
 
 # Sort file by basename while keeping full path
 sorted_paths=$(awk -F/ '{print $0 "\t" $NF}' "$CONFIG_FILE" | sort -k2 | cut -f1)
