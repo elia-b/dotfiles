@@ -24,7 +24,8 @@ if [ -f "$filename" ]; then
     # For lines after the 1st "####"
     count >= 1 {
       if ($0 != "")
-        print
+        if (!index($0, "~~"))
+          print
     }
   ' "$filename"
 fi
