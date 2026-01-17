@@ -3,7 +3,7 @@
 # - update the system
 # - upload any change worth saving to git repos
 #
-sudo pacman -Syu --noconfirm
+sudo pacman -Sc --noconfirm && sudo pacman -Syu --noconfirm
 pass git pull --rebase
 pass git push
 obsidian-sync
