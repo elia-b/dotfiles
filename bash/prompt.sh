@@ -52,26 +52,30 @@ git_branch() {
   return 1
 }
 
-path=( $PWD )  
-home=( $HOME )  
+path="$PWD"
+home="$HOME"
+
 new_prompt=""
 
 if [ "$(whoami)" == "container" ]; then
     new_prompt+="$BLUE$BLACK$BG_BLUE $DEV_CONTAINER_NAME " 
 fi
 
-path_parts=(${path//\// })
-home_parts=(${home//\// })
-if [[ ${#path_parts[@]} -ge 2 && ${#home_parts[@]} -ge 2 && 
- "${path_parts[0]}" == "${home_parts[0]}" &&  "${path_parts[1]}" == "${home_parts[1]}" ]] 
+IFS='/' read -r -a path_parts <<< "$path"
+IFS='/' read -r -a home_parts <<< "$home"
+
+if [[ ${#path_parts[@]} -ge 2 &&
+      ${#home_parts[@]} -ge 2 &&
+      ${path_parts[0]} == "${home_parts[0]}" &&
+      ${path_parts[1]} == "${home_parts[1]}" ]]
 then
-    path_parts=("~" "${path_parts[@]:2}") 
-elif [[ ${#path_parts[@]} == 0 ]]; then
-    path_parts=("/") 
+    path_parts=("~" "${path_parts[@]:2}")
+elif [[ ${#path_parts[@]} -eq 0 ]]; then
+    path_parts=("/")
 fi
 
-case $path in
-    $home)
+case "$path" in
+    "$home")
         path_parts=(" ~") 
         ;;
     "$home/Downloads")
