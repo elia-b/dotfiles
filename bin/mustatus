@@ -144,58 +144,63 @@ def print_center(text, highlight: str | None = None):
     print(f"{row * ' '}{text}")
 
 
-current_track = None
-lyrics = []
-duration = 0
-current_rows = 0
+def main():
+    current_track = None
+    lyrics = []
+    duration = 0
+    current_rows = 0
 
-clear()
-while True:
-    lines = get_cmus_status()
-    if not lines:
-        time.sleep(1)
-        continue
+    clear()
+    while True:
+        lines = get_cmus_status()
+        if not lines:
+            time.sleep(1)
+            continue
 
-    lines_to_reset = 0
-    info = parse_status(lines)
-    track = info.get("file")
-    rows, _ = shutil.get_terminal_size()
+        lines_to_reset = 0
+        info = parse_status(lines)
+        track = info.get("file")
+        rows, _ = shutil.get_terminal_size()
 
-    if track and (track != current_track or rows != current_rows):
-        current_track = track
-        current_rows = rows
-        lyrics = load_lrc(track)
+        if track and (track != current_track or rows != current_rows):
+            current_track = track
+            current_rows = rows
+            lyrics = load_lrc(track)
 
-        clear()
-        if extract_cover(track):
-            print("")
-            show_cover()
+            clear()
+            if extract_cover(track):
+                print("")
+                show_cover()
 
-        artist = info.get("artist", "Unknown Artist")
-        album = info.get("album", "Unknown Album")
-        title = info.get("title", "Unknown Title")
-        year = info.get("date", "")
-        duration = get_duration(track)
+            artist = info.get("artist", "Unknown Artist")
+            album = info.get("album", "Unknown Album")
+            title = info.get("title", "Unknown Title")
+            year = info.get("date", "")
+            duration = get_duration(track)
 
-        print_center(f"{artist} — {title}", highlight=WHITE)
-        print_center(f"{album} ({year})", highlight=YELLOW)
+            print_center(f"{artist} — {title}", highlight=WHITE)
+            print_center(f"{album} ({year})", highlight=YELLOW)
 
-    if lyrics and "position" in info:
-        pos = info["position"]
+        if lyrics and "position" in info:
+            pos = info["position"]
 
-        show_duration(pos, duration)
-        lines_to_reset += 1
-
-        idx = max(i for i, (t, _) in enumerate(lyrics) if t <= pos)
-
-        for i in range(max(0, idx - 2), min(len(lyrics), idx + 3)):
-            line = lyrics[i][1]
+            show_duration(pos, duration)
             lines_to_reset += 1
-            if i == idx:
-                print_center(line, highlight=CYAN)
-            else:
-                print_center(line)
 
-    sys.stdout.flush()
-    time.sleep(1)
-    partial_clear(lines_to_reset)
+            idx = max(i for i, (t, _) in enumerate(lyrics) if t <= pos)
+
+            for i in range(max(0, idx - 2), min(len(lyrics), idx + 3)):
+                line = lyrics[i][1]
+                lines_to_reset += 1
+                if i == idx:
+                    print_center(line, highlight=CYAN)
+                else:
+                    print_center(line)
+
+        sys.stdout.flush()
+        time.sleep(1)
+        partial_clear(lines_to_reset)
+
+
+if __name__ == "__main__":
+    main()
