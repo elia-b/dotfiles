@@ -64,6 +64,7 @@ extract() {
 }
 alias tx="tmux_new_or_attach"
 alias mergepdfs="gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dPDFSETTINGS=/prepress -sOutputFile=merged.pdf"
+alias wav2flac="flac -8 --verify --delete-input-file *.wav"
 
 # Direct directory change with yazi
 function y() {
