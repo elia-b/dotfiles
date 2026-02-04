@@ -31,3 +31,9 @@ export DOTFILES_DEVCONTAINER_COMPLETION=
 export DOTFILES_SUDO_PASSWORD="$(pass temp)"
 export DOTFILES_BOOKMARKS_BACKUP=
 ```
+
+## USB soft link
+
+```bash
+ln -s /run/media ~/Usb
+```
