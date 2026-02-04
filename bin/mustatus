@@ -190,8 +190,12 @@ def main():
             idx = max(i for i, (t, _) in enumerate(lyrics) if t <= pos)
 
             for i in range(max(0, idx - 2), min(len(lyrics), idx + 3)):
+                rows, _ = shutil.get_terminal_size()
                 line = lyrics[i][1]
-                lines_to_reset += 1
+                n_rows = len(line) // rows
+                n_rows += 1 if len(line) % rows > 0 else 0
+                n_rows = max(n_rows, 1)
+                lines_to_reset += n_rows
                 if i == idx:
                     print_center(line, highlight=CYAN)
                 else:
