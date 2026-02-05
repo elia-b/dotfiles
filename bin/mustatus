@@ -144,11 +144,18 @@ def print_center(text, highlight: str | None = None):
     print(f"{row * ' '}{text}")
 
 
+def get_viewer_count():
+    cmd = "tmux list-clients | wc -l"
+    output = subprocess.check_output(cmd, shell=True)
+    return int(output.strip())
+
+
 def main():
     current_track = None
     lyrics = []
     duration = 0
     current_rows = 0
+    current_viewers = 0
 
     clear()
     while True:
@@ -161,10 +168,14 @@ def main():
         info = parse_status(lines)
         track = info.get("file")
         rows, _ = shutil.get_terminal_size()
+        viewers = get_viewer_count()
 
-        if track and (track != current_track or rows != current_rows):
+        if track and (
+            track != current_track or rows != current_rows or viewers != current_viewers
+        ):
             current_track = track
             current_rows = rows
+            current_viewers = viewers
             lyrics = load_lrc(track)
 
             clear()
