@@ -14,9 +14,7 @@ if ! tmux has-session -t "$SESSION" 2>/dev/null; then
     tmux set-option -t "$SESSION" pane-active-border-style "fg=black,bg=black"
 
     # Split the first window horizontally (side by side)
-    tmux split-window -h -t "$SESSION:music" 
-
-    tmux send-keys -t . 'mustatus; exec bash' C-m
+    tmux split-window -h -t "$SESSION:music" "mustatus"
 
     # Focus back on the left pane (cmus)
     tmux select-pane -L

@@ -79,3 +79,6 @@ if [[ -n "$DOTFILES_DEVCONTAINER_COMPLETION" ]]; then
 fi
 
 kpis
+
+# opencode
+export PATH=/home/elia/.opencode/bin:$PATH

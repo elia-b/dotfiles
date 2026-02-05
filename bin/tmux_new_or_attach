@@ -1,10 +1,10 @@
 #!/bin/bash
-# This command either starts a new tmux session if no session is available,
+# This command either starts a new tmux session 0 is not available,
 # or attaches it to the one available.
 # I like to just have one tmux session.
 # This command is run automatically when a terminal is opened so that I am always inside a tmux session.
 
-if tmux ls &>/dev/null; then
+if tmux has-session -t 0 2>/dev/null; then
     tmux attach -t 0
 else
     tmux new-session -s 0
