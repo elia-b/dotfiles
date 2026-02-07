@@ -64,14 +64,15 @@ fi
 IFS='/' read -r -a path_parts <<< "$path"
 IFS='/' read -r -a home_parts <<< "$home"
 
-if [[ ${#path_parts[@]} -ge 2 &&
-      ${#home_parts[@]} -ge 2 &&
+if [[ ${#path_parts[@]} -gt 2 &&
+      ${#home_parts[@]} -gt 2 &&
       ${path_parts[0]} == "${home_parts[0]}" &&
-      ${path_parts[1]} == "${home_parts[1]}" ]]
+      ${path_parts[1]} == "${home_parts[1]}" &&
+      ${path_parts[2]} == "${home_parts[2]}" ]]
 then
     path_parts=("~" "${path_parts[@]:2}")
-elif [[ ${#path_parts[@]} -eq 0 ]]; then
-    path_parts=("/")
+elif [[ ${path_parts[0]} == "" ]]; then
+    path_parts[0]=" " 
 fi
 
 case "$path" in
@@ -89,9 +90,6 @@ case "$path" in
         ;;
     "$home/app")
         path_parts=("~" " ") 
-        ;;
-    "/")
-        path_parts=(" /") 
         ;;
     *)
         ;;
