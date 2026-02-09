@@ -12,7 +12,7 @@ FULL_FILENAME="${FILENAME}.mp3"
 
 FILE_PATH="$HOME/.config/speak/$FULL_FILENAME"
 
-dunstify -u low "🗣" "$TEXT_TO_ECHO"
+dunstify -u normal "🗣" "$TEXT_TO_ECHO"
 
 if [ -f "$FILE_PATH" ]; then
     ffplay -nodisp -autoexit -volume 7 "$FILE_PATH" > /dev/null 2>&1
