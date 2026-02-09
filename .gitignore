@@ -1,5 +1,9 @@
-vifm/scripts/*
-vifm/vifminfo.json
+# Audio files
+speak/*
+
+# Container configurations
 .config/containers/*
 !.config/containers/storage.conf
+
+# Python binaries
 bin/python*
