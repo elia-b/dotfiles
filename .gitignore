@@ -5,5 +5,3 @@ speak/*
 .config/containers/*
 !.config/containers/storage.conf
 
-# Python binaries
-bin/python*

@@ -19,6 +19,7 @@ fi
 if [ -f "$FILE_PATH" ]; then
     ffplay -nodisp -autoexit -volume 7 "$FILE_PATH" > /dev/null 2>&1
 else
-    echo "Error: File '$FULL_FILENAME' not found in $SCRIPT_DIR"
+    echo "Error: File '$FULL_FILENAME' not found in $HOME/.config/speak/"
+    ls -1 "$HOME/.config/speak/" 2>/dev/null || echo "(directory is empty or does not exist)"
     exit 1
 fi
