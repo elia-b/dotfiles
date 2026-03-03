@@ -13,6 +13,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dl="cd ~/Downloads"
+alias p="cd ~/Projects"
 alias fm="yazi ."
 
 # ===============================
@@ -75,9 +76,3 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-# ===============================
-# Personal
-# ===============================
-alias p="cd $DOTFILES_PROJECTS_PATH"
-alias devcontainer="bash $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER"
-alias bookmarksbackup="source $DOTFILES_PROJECTS_PATH$DOTFILES_BOOKMARKS_BACKUP"
