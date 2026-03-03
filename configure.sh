@@ -24,7 +24,6 @@ for app in tmux bash containers yazi speak; do
       continue
   fi
 
-  rm -rf "$tgt"
   ln -sf "$src" "$tgt"
   echo "Linked $src   $tgt"
 done
@@ -57,7 +56,6 @@ for conf in .bashrc .profile .gitconfig; do
       continue
   fi
   
-  rm -f "$tgt"
   ln -sf "$src" "$tgt"
   echo "Linked $src   $tgt"
 done
