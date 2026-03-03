@@ -1,39 +1,19 @@
-# My personal dotfile repo
+# My personal dotfiles
 
 This repository is meant for personal use, but feel free to take inspiration from it or use it.
 
 Initially, I took inspiration from [this blog post](https://drewdevault.com/2019/12/30/dotfiles.html).
-The only difference was that, instead of using `git add -f filename`, I used to modify the `.gitignore` accordingly.
+The only difference was that, instead of using `git add -f filename`, I modified the `.gitignore` instead.
 
-I then realized that I prefer when my home directory is also not a git repository.
+I then realized I prefer my home directory not be a git repository either. So I separated them and used a `configure.sh` script to create symlinks.
 
 It contains:
 
-- bash scripts
-- tmux configurations
-- bash configurations
+- bash scripts (aliases, prompt) and shell configuration (.bashrc, .profile)
+- tmux configuration
+- yazi configuration (file manager)
+- container storage configuration
+- git configuration
+- custom scripts (bin/)
 
-My [Sway configuration](https://github.com/elia-b/SwayConfig) and
-my [Neovim configuration](https://github.com/elia-b/NeovimConfig) are separate,
-so that if in a container I just need my dotfiles + neovim it is easier I do not need to include my sway configs as well.
-At the same time I like neovim being separate as well since its configuration tends to be quite complicated with many files.
-
-## Environment Variables
-
-The next are some environment variables meant for personal projects.
-So that this repo fully works an `.env` with the following variables should be defined:
-
-```bash
-export DOTFILES_PROJECTS_PATH=
-export DOTFILES_OBSIDIAN_VAULT=
-export DOTFILES_DEVCONTAINER=
-export DOTFILES_DEVCONTAINER_COMPLETION=
-export DOTFILES_SUDO_PASSWORD="$(pass temp)"
-export DOTFILES_BOOKMARKS_BACKUP=
-```
-
-## USB soft link
-
-```bash
-ln -s /run/media ~/Usb
-```
+My [Sway configuration](https://github.com/elia-b/SwayConfig) and [Neovim configuration](https://github.com/elia-b/NeovimConfig) are kept separate. This keeps containers light — I can grab just dotfiles + neovim without Sway overhead. Neovim also deserves its own repo since its config is complex with many files.
