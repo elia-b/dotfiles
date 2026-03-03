@@ -10,10 +10,6 @@ if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
   PATH="$HOME/.local/bin:$PATH"
 fi
 
-if [ -r "$HOME/.env" ] && [ -f "$HOME/.env" ]; then
-  source "$HOME/.env";
-fi
-
 # Import configuration files
 for file in $HOME/.config/bash/{aliases,}.sh; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
@@ -73,12 +69,9 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
 export FZF_DEFAULT_OPTS='--color 16'
 eval "$(fzf --bash)"
 
-# devcontainer completion
-if [[ -n "$DOTFILES_DEVCONTAINER_COMPLETION" ]]; then
-  source $DOTFILES_PROJECTS_PATH$DOTFILES_DEVCONTAINER_COMPLETION
+if command -v kpis >/dev/null 2>&1; then
+  kpis
 fi
 
-kpis
-
-# opencode
+# opencode temporary until opencode not in archrepo
 export PATH=/home/elia/.opencode/bin:$PATH
