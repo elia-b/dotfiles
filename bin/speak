@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <text_to_echo> <filename_without_extension>"
+    echo "Usage: $0 <text_to_echo> <audio_filename_without_extension>"
     exit 1
 fi
 
@@ -12,7 +12,9 @@ FULL_FILENAME="${FILENAME}.mp3"
 
 FILE_PATH="$HOME/.config/speak/$FULL_FILENAME"
 
-dunstify -u normal "🗣" "$TEXT_TO_ECHO"
+if command -v dunstify >/dev/null 2>&1; then
+    dunstify -u normal "🗣" "$TEXT_TO_ECHO"
+fi
 
 if [ -f "$FILE_PATH" ]; then
     ffplay -nodisp -autoexit -volume 7 "$FILE_PATH" > /dev/null 2>&1
