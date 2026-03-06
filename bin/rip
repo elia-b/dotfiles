@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+    echo "Usage: $0 <new_directory_name>"
+    exit 1
+fi
+
+TARGET_DIR="$HOME/Downloads/$1"
+
+if [[ -e "$TARGET_DIR" ]]; then
+    echo "Error: Directory '$TARGET_DIR' already exists."
+    exit 1
+fi
+
+if command -v cdparanoia &> /dev/null; then
+    mkdir -p "$TARGET_DIR"
+    cd "$TARGET_DIR"
+
+    echo "Ripping CD tracks to WAV..."
+    cdparanoia -B
+
+    echo "Encoding to FLAC and deleting WAV files..."
+    flac --best --delete-input-file *.wav
+
+    echo "Done. Files saved in: $TARGET_DIR"
+else
+    echo "No Ripping"
+fi
