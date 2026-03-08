@@ -70,7 +70,7 @@ if [[ ${#path_parts[@]} -gt 2 &&
       ${path_parts[1]} == "${home_parts[1]}" &&
       ${path_parts[2]} == "${home_parts[2]}" ]]
 then
-    path_parts=("~" "${path_parts[@]:2}")
+    path_parts=("~" "${path_parts[@]:3}")
 elif [[ ${path_parts[0]} == "" ]]; then
     path_parts[0]=" " 
 fi
