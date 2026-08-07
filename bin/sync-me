@@ -8,6 +8,8 @@ run() {
   fi
 }
 
+sudo reflector --country DE --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+sudo pacman -Syy  --noconfirm
 sudo pacman -Sc --noconfirm && sudo pacman -Syu --noconfirm
 run pass git pull --rebase
 run pass git push
