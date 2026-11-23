@@ -1,10 +1,10 @@
 # ===============================
 # File Listing Aliases
 # ===============================
-alias l='exa --icons --color -F -a --no-filesize --no-permissions --no-user --no-time'
-alias ll='exa --git --icons --color -F -al'
-alias t='exa --tree -F --icons'
-alias ta='exa --tree -aF --icons'
+alias l='eza --icons --color -F -a --no-filesize --no-permissions --no-user --no-time'
+alias ll='eza --git --icons --color -F -al'
+alias t='eza --tree -F --icons'
+alias ta='eza --tree -aF --icons'
 
 # ===============================
 # Directory Navigation Aliases
@@ -22,7 +22,7 @@ alias fm="yazi ."
 alias vi=nvim
 alias vim=nvim
 alias f='selected=$(fzf --preview="bat --theme="ansi" --color=always {}") && [ -n "$selected" ] && nvim "$selected"'
-alias nvim-clean="ls ~/.local/state/nvim/swap/ | xargs -I {} rm -f ~/.local/state/nvim/swap/{}" 
+alias nvim-clean='command rm -f ~/.local/state/nvim/swap/*'
 
 # ===============================
 # Git Aliases
@@ -44,7 +44,8 @@ alias screen_shot_partial='slurp | grim -g - - | tee ~/Pictures/Screenshots/$(da
 # Miscellaneous Useful Aliases
 # ===============================
 alias open=xdg-open
-alias cat="bat --color=always"
+# Colored in the terminal, plain text when piped or redirected
+alias cat="bat --paging=never"
 alias rm='rm -i --preserve-root'
 extract() {
     if [ -f "$1" ]; then

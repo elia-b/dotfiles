@@ -1,7 +1,0 @@
-# Audio files
-speak/*
-
-# Container configurations
-.config/containers/*
-!.config/containers/storage.conf
-

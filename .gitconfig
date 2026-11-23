@@ -1,9 +1,15 @@
-# I decided to define my user at system level,
-# since I am the only user on this machine 
-# and also so that I do not commit my email.
+# User name/email live in ~/.gitconfig.local (not committed), e.g.:
+#   [user]
+#       name = ...
+#       email = ...
+[include]
+	path = ~/.gitconfig.local
 
 [init]
 	defaultBranch = main
+
+[color]
+	ui = auto
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f

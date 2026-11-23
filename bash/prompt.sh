@@ -1,42 +1,12 @@
-#!/bin/bash
+# Prompt line, sourced once by .bashrc.
+# Defines __promptline, which .bashrc runs from PROMPT_COMMAND to set PS1.
 
-# Define text colors
-BLACK='\e[30m'
-RED='\e[31m'
-GREEN='\e[32m'
-YELLOW='\e[33m'
-BLUE='\e[34m'
-MAGENTA='\e[35m'
-CYAN='\e[36m'
-WHITE='\e[37m'
+source "$(dirname "$(realpath "${BASH_SOURCE[0]}")")/colors.sh"
 
-# Define background colors
-BG_BLACK='\e[40m'
-BG_RED='\e[41m'
-BG_GREEN='\e[42m'
-BG_YELLOW='\e[43m'
-BG_BLUE='\e[44m'
-BG_MAGENTA='\e[45m'
-BG_CYAN='\e[46m'
-BG_WHITE='\e[47m'
-BG_DEFAULT='\e[49m'
-RESET='\e[0m'
-
-# Extra Everforest colors: #7a8478 #859289 #9da9a0
-
-THM_GREY0='\033[38;2;122;132;120m'
-THM_GREY1='\033[38;2;133;146;137m'
-THM_GREY2='\033[38;2;157;169;160m'
-BG_THM_GREY0='\033[48;2;122;132;120m'
-BG_THM_GREY1='\033[48;2;133;146;137m'
-BG_THM_GREY2='\033[48;2;157;169;160m'
-
-git_branch() {
-  git rev-parse --is-inside-work-tree &>/dev/null || return 1
-
-  local git_root prefix relpath branch
-  git_root=$(git rev-parse --show-toplevel)
-  prefix=$(git rev-parse --show-prefix)
+__prompt_git_branch() {
+  local prefix relpath
+  # Fails outside a work tree (and inside .git), which hides the branch
+  prefix=$(git rev-parse --show-prefix 2>/dev/null) || return 1
 
   if [ -n "$prefix" ]; then
     relpath=${prefix%/}
@@ -45,19 +15,18 @@ git_branch() {
   fi
 
   if ! git check-ignore -q "$relpath"; then
-    git symbolic-ref --quiet --short HEAD
+    git symbolic-ref --quiet --short HEAD || git rev-parse --short HEAD 2>/dev/null
     return 0
   fi
 
   return 1
 }
 
-path="$PWD"
-home="$HOME"
+__promptline() {
+local path="$PWD" home="$HOME" new_prompt="" branch i
+local -a path_parts home_parts
 
-new_prompt=""
-
-if [ "$(whoami)" == "container" ]; then
+if [ "$USER" == "container" ]; then
     new_prompt+="$BLUE$BLACK$BG_BLUE $DEV_CONTAINER_NAME " 
 fi
 
@@ -95,7 +64,7 @@ case "$path" in
         ;;
 esac
 
-if [ "$(whoami)" == "container" ]; then
+if [ "$USER" == "container" ]; then
     if (( 1 == ${#path_parts[@]})); then
         new_prompt+="$GREEN$BG_BLUE"
     else
@@ -143,7 +112,7 @@ for (( i=0; i<${#path_parts[@]}; i++ )); do
     fi
 done
 
-if branch=$(git_branch); then
+if branch=$(__prompt_git_branch); then
     new_prompt+="$GREEN$BG_DEFAULT  $branch" 
 fi
 
@@ -153,5 +122,6 @@ fi
 
 new_prompt+="$RESET\n\$ "
 
-echo "${new_prompt}" 
+PS1="${new_prompt}"
+}
 

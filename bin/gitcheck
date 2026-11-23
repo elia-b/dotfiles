@@ -5,16 +5,7 @@
 
 CONFIG_FILE="$HOME/.local/gitcheck/.gitcheck"
 
-# Define text colors
-BLACK='\e[30m'
-RED='\e[31m'
-GREEN='\e[32m'
-YELLOW='\e[33m'
-BLUE='\e[34m'
-MAGENTA='\e[35m'
-CYAN='\e[36m'
-WHITE='\e[37m'
-RESET='\e[0m'
+source "$(dirname "$(realpath "$0")")/../bash/colors.sh"
 
 add_path() {
     # Function to add a path to the file
@@ -103,10 +94,10 @@ sorted_paths=$(awk -F/ '{print $0 "\t" $NF}' "$CONFIG_FILE" | sort -k2 | cut -f1
 # Iterate through the paths
 while IFS= read -r path; do
     [[ -z "$path" ]] && continue
-    eval path="$path"  # expand ~
+    path="${path/#\~/$HOME}"  # expand a leading ~ without eval
     repo_name=$(basename "$path")
 
-    if [[ -d "$path/.git" ]]; then
+    if [[ -e "$path/.git" ]]; then
         # Move to repo then come back
         pushd "$path" >/dev/null 2>&1
         if [[ -n "$(git status --porcelain 2>/dev/null)" ]]; then
@@ -115,20 +106,20 @@ while IFS= read -r path; do
         else
             # Fetch remote silently
             if $FETCH; then
-                git fetch origin >/dev/null 2>&1
+                git fetch >/dev/null 2>&1
             fi
 
             # Check remote tracking info
-            local=$(git rev-parse @ 2>/dev/null)
+            head=$(git rev-parse @ 2>/dev/null)
             remote=$(git rev-parse @{u} 2>/dev/null || echo "")
             base=$(git merge-base @ @{u} 2>/dev/null || echo "")
 
             # Decide color/icon based on ahead/behind/diverged status
             if [[ -z "$remote" ]]; then
                 echo -e "${YELLOW} ${repo_name} (no upstream)${RESET}"
-            elif [[ "$local" == "$remote" ]]; then
+            elif [[ "$head" == "$remote" ]]; then
                 echo -e "${GREEN} ${repo_name}${RESET}"
-            elif [[ "$local" == "$base" ]]; then
+            elif [[ "$head" == "$base" ]]; then
                 echo -e "${BLUE} ${repo_name} (behind)${RESET}"
             elif [[ "$remote" == "$base" ]]; then
                 echo -e "${CYAN} ${repo_name} (ahead)${RESET}"

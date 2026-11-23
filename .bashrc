@@ -5,16 +5,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Add `~/bin` to the `$PATH`
-if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-  PATH="$HOME/.local/bin:$PATH"
-fi
+# PATH and EDITOR live in ~/.profile (login environment).
+# Load it here only if this shell did not inherit it (e.g. `podman exec bash`).
+[[ -z $DOTFILES_PROFILE && -r ~/.profile ]] && source ~/.profile
 
-# Import configuration files
-for file in $HOME/.config/bash/{aliases,}.sh; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
+# Aliases and prompt
+[[ -r ~/.config/bash/aliases.sh ]] && source ~/.config/bash/aliases.sh
+[[ -r ~/.config/bash/prompt.sh ]] && source ~/.config/bash/prompt.sh
 
 # Don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -34,24 +31,20 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
-# Set vim motion and vim as editor
+# Vim motions (EDITOR is set in ~/.profile)
 set -o vi
 bind -m vi-command 'Control-l: clear-screen'
 bind -m vi-insert 'Control-l: clear-screen'
-VISUAL="nvim"
-export EDITOR=$VISUAL
 
-# Promptline
-function promptline {
-    PS1=$($HOME/.config/bash/prompt.sh)
-}
-PROMPT_COMMAND="promptline; $PROMPT_COMMAND"
+# Promptline (__promptline is defined in prompt.sh)
+PROMPT_COMMAND="__promptline; $PROMPT_COMMAND"
 
 # After each command, append to the history file, 
 # in a already open tab this is only seen when I run some command to reload the history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-set show-all-if-ambiguous on
+# Show completion candidates on the first Tab instead of the second
+bind 'set show-all-if-ambiguous on'
 
 # Enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -65,13 +58,12 @@ if ! shopt -oq posix; then
 fi
 
 # fzf completion
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
-export FZF_DEFAULT_OPTS='--color 16'
-eval "$(fzf --bash)"
+if command -v fzf >/dev/null 2>&1; then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+  export FZF_DEFAULT_OPTS='--color 16'
+  eval "$(fzf --bash)"
+fi
 
 if command -v kpis >/dev/null 2>&1; then
   kpis
 fi
-
-# opencode temporary until opencode not in archrepo
-export PATH=/home/elia/.opencode/bin:$PATH

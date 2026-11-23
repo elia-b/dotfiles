@@ -1,18 +1,21 @@
 #!/bin/bash
+# Refresh mirrors, update the system (repo + AUR) and sync personal data.
+# The package cache is cleaned by `clean`.
+set -uo pipefail
+
 run() {
   local cmd="$1"
   if command -v "$cmd" >/dev/null 2>&1; then
     shift; "$cmd" "$@"
   else
-    echo " Warning: $cmd is not available"
+    echo " Warning: $cmd is not available"
   fi
 }
 
 sudo reflector --country DE --latest 10 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
-sudo pacman -Syy  --noconfirm
-sudo pacman -Sc --noconfirm && sudo pacman -Syu --noconfirm
-run pass git pull --rebase
-run pass git push
+# -yy forces a database refresh, recommended after changing mirrors
+run paru -Syyu
+run pass git pull --rebase && run pass git push
 run nvim-sync
 run obsidian-sync
 run backup-bookmarks
